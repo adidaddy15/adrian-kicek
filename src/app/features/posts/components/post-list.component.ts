@@ -19,11 +19,30 @@ import { PostFiltersComponent } from './filters/post-filters.component';
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @for (post of postCache.filteredPosts(); track post.id) {
-        <app-post-card [post]="post" />
+        <app-post-card [post]="post" animate.enter="enter-animation" />
+        } @if (!postCache.filteredPosts().length) {
+        <p class="text-gray-500">No comments yet.</p>
         }
       </div>
     </div>
   `,
+  styles: [
+    `
+      .enter-animation {
+        animation: slide-fade 1s;
+      }
+      @keyframes slide-fade {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    `,
+  ],
 })
 export class PostListComponent implements OnInit {
   postCache = inject(PostCacheService);

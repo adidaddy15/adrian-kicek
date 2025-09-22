@@ -2,15 +2,19 @@ import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../../shared/models/post.interface';
 import { FavouritesService } from '../../../core/services/favourites-service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
-    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow relative">
+    <div
+      class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow relative cursor-pointer"
+      [routerLink]="['/posts', post.id]"
+    >
       <button
-        (click)="toggleFavourite()"
+        (click)="onFavouriteClick($event)"
         class="absolute top-4 right-4 text-2xl"
         [class.text-yellow-500]="isFavourite"
         [class.text-gray-300]="!isFavourite"
@@ -28,6 +32,11 @@ export class PostCardComponent {
 
   get isFavourite(): boolean {
     return this.favouritesService.isFavourite(this.post.id);
+  }
+
+  onFavouriteClick(event: MouseEvent) {
+    event.stopPropagation();
+    this.toggleFavourite();
   }
 
   toggleFavourite(): void {

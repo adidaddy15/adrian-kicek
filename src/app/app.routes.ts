@@ -7,5 +7,12 @@ export const routes: Routes = [
     path: '',
     component: PostListComponent,
   },
+  {
+    path: 'posts/:id',
+    loadComponent: () =>
+      import('./features/posts/components/post-details.component').then(
+        (m) => m.PostDetailsComponent
+      ),
+  },
   { path: '**', redirectTo: '' },
 ];
