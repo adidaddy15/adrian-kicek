@@ -4,7 +4,7 @@
 
 ### Dla jasności - żaden fragment zadania nie zostanie wykorzystany komercyjnie, jest to zadanie czysto rekrutacyjne.
 
-## Cel
+## Cel.
 
 Twoim zadaniem jest przygotowanie mini-aplikacji w Angular 20 z wykorzystaniem nowoczesnych funkcjonalności frameworka.
 
