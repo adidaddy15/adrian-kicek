@@ -1,0 +1,41 @@
+<div class="bg-white p-4 rounded-lg shadow-md">
+  <div class="space-y-4">
+    <div class="flex flex-col">
+      <label for="searchText" class="text-sm font-medium text-gray-700 mb-1">Search Posts</label>
+      <input
+        id="searchText"
+        type="text"
+        [ngModel]="postCache.filters$().searchText"
+        (ngModelChange)="updateSearchText($event)"
+        class="p-2 border rounded-md"
+        placeholder="Search in title or body..."
+      />
+    </div>
+
+    <div class="flex flex-col">
+      <label for="userId" class="text-sm font-medium text-gray-700 mb-1">Filter by User</label>
+      <select
+        id="userId"
+        [ngModel]="postCache.filters$().userId"
+        (ngModelChange)="updateUserId($event)"
+        class="p-2 border rounded-md"
+      >
+        <option [ngValue]="null">All Users</option>
+        @for (userId of userIds; track userId) {
+        <option [ngValue]="userId">User {{ userId }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="flex items-center">
+      <input
+        type="checkbox"
+        id="favouritesOnly"
+        [ngModel]="postCache.filters$().favouritesOnly"
+        (ngModelChange)="updateFavouritesOnly($event)"
+        class="h-4 w-4 text-blue-600"
+      />
+      <label for="favouritesOnly" class="ml-2 text-sm text-gray-700"> Show Favourites Only </label>
+    </div>
+  </div>
+</div>
